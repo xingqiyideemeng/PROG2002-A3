@@ -123,6 +123,20 @@
     </table>
   </div>
 
+  <div *ngIf="loadingWeather" class="loading">Loading event weather...</div>
+  <div class="event-weather" *ngIf="weather">
+    <h3>Weather Forecast</h3>
+    <div class="weather-cards">
+      <div class="weather-card" *ngFor="let day of weather.time; let i = index">
+        <div class="date">{{ day | date:'mediumDate' }}</div>
+        <div class="temp">
+          <span class="max">{{ weather.temperature_2m_max[i] }}°C</span> /
+          <span class="min">{{ weather.temperature_2m_min[i] }}°C</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- 注册模态框 -->
   <div class="modal" *ngIf="showModalFlag">
     <div class="modal-content">

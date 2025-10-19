@@ -48,4 +48,13 @@ export class EventsApi {
   getEventDetails(id: string): Observable<CharityEvent> {
     return this.http.get<CharityEvent>(HOST +'/api/events/' + id)
   }
+
+  getLatLon(address: string): Observable<any> {
+    const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}`;
+    return this.http.get<any>(url);
+  }
+
+  getWeather(lat: string, lon: string): Observable<any> {
+    return this.http.get<any>(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=weather_code,temperature_2m_max,temperature_2m_min&timezone=Australia%2FSydney`);
+  }
 }

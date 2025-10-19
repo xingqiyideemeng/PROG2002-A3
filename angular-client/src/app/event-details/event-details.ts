@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {EventsApi} from '../api/events-api';
+import {EventsApi, CharityEvent} from '../api/events-api';
 import {CommonModule} from '@angular/common';
 import {Navbar} from '../navbar/navbar';
 import {Registration, RegistrationsApi} from '../api/registrations-api';
@@ -13,8 +13,10 @@ import {Registration, RegistrationsApi} from '../api/registrations-api';
 })
 export class EventDetails {
   event: any;
+  weather: any;
   loading = true;
   loadingRegs = true;
+  loadingWeather = true;
   errorMessage = '';
   showModalFlag = false;
   registrations: Registration[] = [];
@@ -38,6 +40,7 @@ export class EventDetails {
       next: (data: any) => {
         this.event = data;
         this.loading = false;
+        this.getLatLon(this.event);
       },
       error: (err) => {
         console.error(err);
@@ -77,5 +80,37 @@ export class EventDetails {
 
   closeModal(): void {
     this.showModalFlag = false;
+  }
+
+  getLatLon(event: CharityEvent): void {
+    const fullAddress = `${event.city}, ${event.state_region}, ${event.postcode}, ${event.country}`;
+    this.eventsApi.getLatLon(fullAddress).subscribe({
+      next: (data: any) => {
+        if (data.length > 0) {
+          const lat = data[0].lat;
+          const lon = data[0].lon;
+          this.getWeather(lat, lon);
+        }
+      },
+      error: (err) => {
+        console.error(err);
+        this.errorMessage = 'Error loading event lat and lon. Please try again.';
+        this.loadingWeather = false;
+      },
+    })
+  }
+
+  getWeather(lat: string, lon: string): void {
+    this.eventsApi.getWeather(lat, lon).subscribe({
+      next: (data: any) => {
+        this.weather = data.daily;
+        this.loadingWeather = false;
+      },
+      error: (err) => {
+        console.error(err);
+        this.errorMessage = 'Error loading event weather. Please try again.';
+        this.loadingWeather = false;
+      },
+    })
   }
 }

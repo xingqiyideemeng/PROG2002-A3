@@ -5,3 +5,54 @@
 .registered-participants h3 {
   color: var(--neon-blue);
 }
+
+.event-weather {
+  margin-bottom: 10rem;
+}
+
+.event-weather h3 {
+  color: var(--neon-blue);
+  margin-bottom: 1rem;
+}
+
+.weather-cards {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.weather-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 8px;
+  padding: 1rem;
+  width: 120px;
+  text-align: center;
+  color: var(--text-primary);
+  box-shadow: 0 0 15px rgba(0, 243, 255, 0.2);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.weather-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 20px var(--neon-blue);
+}
+
+.weather-card .date {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  color: var(--neon-purple);
+}
+
+.weather-card .temp {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.weather-card .max {
+  color: var(--neon-green);
+}
+
+.weather-card .min {
+  color: var(--neon-pink);
+}
