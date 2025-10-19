@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Charity Events - Home</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<nav class="navbar">
+    <div class="nav-container">
+        <h1 class="nav-logo">CharityEvents</h1>
+        <ul class="nav-menu">
+            <li><a href="../index.html" class="nav-link">Home</a></li>
+            <li><a href="pages/search.html" class="nav-link">Search event</a></li>
+            <li><button id="navRegisterBtn" class="nav-register-btn">
+                <span class="btn-icon">🎫</span>
+                Register now
+            </button></li>
+        </ul>
+    </div>
+</nav>
+
+    <main class="container">
+        <section class="hero">
+            <h2>Make a Difference Through Charity Events</h2>
+            <p>Join us in supporting meaningful causes across Australia</p>
+        </section>
+
+        <section class="org-info">
+            <h3>About Our Charities</h3>
+            <div class="org-cards" id="orgCards">
+                <!-- 组织信息将通过 JavaScript 动态加载 -->
+            </div>
+        </section>
+
+        <section class="events-section">
+            <h3>Upcoming Events</h3>
+            <div class="events-grid" id="eventsGrid">
+                <!-- 事件将通过 JavaScript 动态加载 -->
+            </div>
+        </section>
+    </main>
+
+    <script src="/js/main.js"></script>
+    <script src="/js/home.js"></script>
+</body>
+</html>

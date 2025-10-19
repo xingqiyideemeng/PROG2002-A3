@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Details - Charity Events</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+   <nav class="navbar">
+    <div class="nav-container">
+        <h1 class="nav-logo">CharityEvents</h1>
+        <ul class="nav-menu">
+            <li><a href="/" class="nav-link">Home</a></li>
+            <li><a href="/search" class="nav-link">Search event</a></li>
+            <li><button id="navRegisterBtn" class="nav-register-btn">
+                <span class="btn-icon">🎫</span>
+                Register now
+
+            </button></li>
+        </ul>
+    </div>
+</nav>
+
+    <main class="container">
+        <div id="loadingMessage" class="loading">Loading event details...</div>
+
+        <section id="eventDetails" class="event-details" style="display: none;">
+            <div class="event-header">
+                <img id="eventImage" src="" alt="Event Image" class="event-detail-image">
+                <div class="event-header-info">
+                    <h2 id="eventName"></h2>
+                    <p id="eventShortDescription" class="event-short-desc"></p>
+                    <div class="event-meta-large">
+                        <span id="eventCategory" class="event-category-badge"></span>
+                        <span id="eventOrganization" class="event-org"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="event-content-grid">
+                <div class="event-main-content">
+                    <h3>Event Details</h3>
+                    <p id="eventFullDescription" class="event-full-desc"></p>
+
+                    <div class="event-info-card">
+                        <h4>Event Information</h4>
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <strong>Date & Time:</strong>
+                                <span id="eventDateTime"></span>
+                            </div>
+                            <div class="info-item">
+                                <strong>Venue:</strong>
+                                <span id="eventVenue"></span>
+                            </div>
+                            <div class="info-item">
+                                <strong>Location:</strong>
+                                <span id="eventLocation"></span>
+                            </div>
+                            <div class="info-item">
+                                <strong>Ticket Price:</strong>
+                                <span id="eventTicketPrice"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="event-sidebar">
+                    <div class="goal-progress-card">
+                        <h4>Fundraising Goal</h4>
+                        <div class="progress-container">
+                            <div class="progress-bar">
+                                <div id="progressFill" class="progress-fill"></div>
+                            </div>
+                            <div class="progress-text">
+                                <span id="progressAmount"></span> raised of
+                                <span id="goalAmount"></span> goal
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="ticket-info-card">
+                        <h4>Ticket Information</h4>
+                        <p id="ticketAvailability"></p>
+                        <button id="registerBtn" class="register-btn">
+                            Register Now
+                        </button>
+                    </div>
+
+                    <div class="org-contact-card">
+                        <h4>Organizer Contact</h4>
+                        <p id="orgContact"></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <div id="errorMessage" class="error-message" style="display: none;"></div>
+    <!-- 注册模态框 -->
+<div id="registerModal" class="modal" style="display: none;">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeRegisterModal()">&times;</span>
+        <div class="modal-header">
+            <h3>🎉 注册活动</h3>
+        </div>
+        <div class="modal-body">
+            <div class="construction-animation">
+                <div class="construction-icon">🚧</div>
+                <h4>此功能正在积极构建中</h4>
+                <p>我们的开发团队正在努力打造完美的注册体验。请稍后再回来查看这个令人兴奋的新功能！</p>
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 65%"></div>
+                    </div>
+                    <span class="progress-text">开发进度: 65%</span>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn-primary" onclick="closeRegisterModal()">太棒了，期待中！</button>
+            <button class="btn-secondary" onclick="closeRegisterModal()">稍后提醒我</button>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+    </main>
+
+
+    <!-- 注册模态框 -->
+
+<!-- 使用绝对路径引用CSS和JS -->
+<link rel="stylesheet" href="/css/style.css">
+
+<script src="/js/main.js"></script>
+<script src="/js/event-details.js"></script>
+</body>
+</html>
