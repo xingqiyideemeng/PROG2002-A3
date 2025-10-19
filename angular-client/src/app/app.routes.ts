@@ -6,6 +6,7 @@ import { Register } from './register/register';
 import { AdminLayout } from './admin-layout/admin-layout';
 import { AdminEvents } from './admin-events/admin-events';
 import { AdminCategories } from './admin-categories/admin-categories';
+import { AdminRegistrations } from './admin-registrations/admin-registrations';
 
 export const routes: Routes = [
   { path: '', component: Index },
@@ -19,6 +20,7 @@ export const routes: Routes = [
       { path: '', redirectTo: 'events', pathMatch: 'full' },
       { path: 'events', component: AdminEvents },
       { path: 'categories', component: AdminCategories },
+      { path: 'registrations', component: AdminRegistrations },
     ]
   },
 ];

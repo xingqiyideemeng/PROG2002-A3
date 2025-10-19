@@ -39,7 +39,7 @@ export class AdminApi {
 
   // 创建注册
   createRegistration(registration: Registration): Observable<any> {
-    return this.http.post(HOST + '/api/admin/registrations', registration);
+    return this.http.post(HOST + '/api/registrations', registration);
   }
 
   // 更新注册

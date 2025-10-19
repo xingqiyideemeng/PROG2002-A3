@@ -6,6 +6,7 @@ import {HOST} from '../config';
 export interface Registration {
   id?: number;
   event_id: number;
+  event_name?: string;
   full_name: string;
   email: string;
   contact_phone: string;
