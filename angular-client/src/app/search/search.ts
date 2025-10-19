@@ -3,10 +3,12 @@ import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 import {CharityEvent, EventsApi} from '../api/events-api';
 import {CategoriesApi, Category} from '../api/categories-api';
+import {Navbar} from '../navbar/navbar';
+import {EventCard} from '../event-card/event-card';
 
 @Component({
   selector: 'app-search',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, Navbar, EventCard],
   templateUrl: './search.html',
   styleUrl: './search.css'
 })

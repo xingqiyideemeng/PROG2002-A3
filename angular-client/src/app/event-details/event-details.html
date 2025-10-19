@@ -1,18 +1,4 @@
-<nav class="navbar">
-  <div class="nav-container">
-    <h1 class="nav-logo">CharityEvents</h1>
-    <ul class="nav-menu">
-      <li><a routerLink="/" class="nav-link">Home</a></li>
-      <li><a routerLink="/search" class="nav-link">Search event</a></li>
-      <li>
-        <button class="nav-register-btn" (click)="openModal()">
-          <span class="btn-icon">🎫</span>
-          Register now
-        </button>
-      </li>
-    </ul>
-  </div>
-</nav>
+<app-navbar></app-navbar>
 
 <main class="container">
   <div *ngIf="loading" class="loading">Loading event details...</div>

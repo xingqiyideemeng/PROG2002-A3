@@ -2,10 +2,12 @@ import { Component } from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {CharityEvent, EventsApi} from '../api/events-api';
 import {OrganizationsApi, Organization} from '../api/organizations-api';
+import {Navbar} from '../navbar/navbar';
+import {EventCard} from '../event-card/event-card';
 
 @Component({
   selector: 'app-index',
-  imports: [CommonModule],
+  imports: [CommonModule, Navbar, EventCard],
   templateUrl: './index.html',
   styleUrl: './index.css'
 })

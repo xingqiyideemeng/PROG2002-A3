@@ -2,10 +2,11 @@ import { Component } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {EventsApi} from '../api/events-api';
 import {CommonModule} from '@angular/common';
+import {Navbar} from '../navbar/navbar';
 
 @Component({
   selector: 'app-event-details',
-  imports: [CommonModule],
+  imports: [CommonModule, Navbar],
   templateUrl: './event-details.html',
   styleUrl: './event-details.css'
 })

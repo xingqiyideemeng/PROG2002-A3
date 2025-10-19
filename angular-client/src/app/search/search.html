@@ -1,17 +1,4 @@
-<nav class="navbar">
-  <div class="nav-container">
-    <h1 class="nav-logo">CharityEvents</h1>
-    <ul class="nav-menu">
-      <li><a routerLink="/" class="nav-link">Home</a></li>
-      <li><a routerLink="/search" class="nav-link active">Search event</a></li>
-      <li>
-        <button class="nav-register-btn">
-          <span class="btn-icon">🎫</span> Register now
-        </button>
-      </li>
-    </ul>
-  </div>
-</nav>
+<app-navbar></app-navbar>
 
 <main class="container">
   <!-- 搜索表单 -->
@@ -65,36 +52,7 @@
     <div class="events-grid" *ngIf="!isLoading && !errorMessage">
       <p *ngIf="events.length === 0">No events found matching your criteria.</p>
 
-      <div *ngFor="let event of events" class="event-card">
-        <img
-          [src]="event.image_url || 'https://picsum.photos/400/300?random=' + event.id"
-          [alt]="event.name"
-          class="event-image"
-        />
-        <div class="event-content">
-          <h4 class="event-title">{{ event.name }}</h4>
-          <p class="event-description">{{ event.short_description }}</p>
-
-          <div class="event-meta">
-            <span class="event-category">{{ event.category_name }}</span>
-            <span class="event-location">{{ event.city }}, {{ event.state_region }}</span>
-          </div>
-
-          <div class="event-date">
-            {{ event.start_at | date:'MMM d, y' }}
-          </div>
-
-          <div class="event-price">
-            {{ event.ticket_price_cents > 0
-            ? ('$' + ((event.ticket_price_cents / 100) | number:'1.2-2'))
-            : 'Free' }}
-          </div>
-
-          <button class="view-details-btn" (click)="viewEventDetails(event.id!)">
-            View Details
-          </button>
-        </div>
-      </div>
+      <app-event-card *ngFor="let event of events" [event]="event"></app-event-card>
     </div>
   </section>
 </main>
