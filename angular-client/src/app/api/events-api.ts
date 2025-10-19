@@ -7,6 +7,8 @@ export interface CharityEvent {
   id?: number;
   org_id: number;
   category_id: number;
+  category_name?: number;
+  org_name?: number;
   name: string;
   short_description: string;
   full_description: string;
@@ -20,6 +22,7 @@ export interface CharityEvent {
   start_at: string;
   end_at: string;
   is_suspended: number;
+  ticket_price_cents: number;
   currency: string;
   tickets_total: number;
   tickets_sold: number;

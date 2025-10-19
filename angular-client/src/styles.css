@@ -1,1 +1,901 @@
 /* You can add global styles to this file, and also import other style files */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --neon-blue: #00f3ff;
+  --neon-purple: #b967ff;
+  --neon-pink: #ff2a6d;
+  --neon-green: #00ff9d;
+  --neon-yellow: #ffde59;
+
+  --dark-bg: #0a0a0f;
+  --darker-bg: #050508;
+  --card-bg: #11111f;
+  --card-border: #1a1a2e;
+
+  --text-primary: #ffffff;
+  --text-secondary: #b8b8d6;
+  --text-muted: #6c6c8a;
+
+  --glow-blue: 0 0 10px rgba(0, 243, 255, 0.5), 0 0 20px rgba(0, 243, 255, 0.3);
+  --glow-purple: 0 0 10px rgba(185, 103, 255, 0.5), 0 0 20px rgba(185, 103, 255, 0.3);
+  --glow-pink: 0 0 10px rgba(255, 42, 109, 0.5), 0 0 20px rgba(255, 42, 109, 0.3);
+  --glow-green: 0 0 10px rgba(0, 255, 157, 0.5), 0 0 20px rgba(0, 255, 157, 0.3);
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  color: var(--text-primary);
+  background: var(--dark-bg);
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* ===== 导航栏 - 保持原有结构 ===== */
+.navbar {
+  background: rgba(10, 10, 15, 0.95);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--card-border);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  padding: 1rem 0;
+}
+
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.nav-menu {
+  display: flex;
+  list-style: none;
+  gap: 2rem;
+}
+
+.nav-link {
+  color: var(--text-secondary);
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: var(--neon-blue);
+  background: rgba(0, 243, 255, 0.1);
+  border-color: var(--neon-blue);
+  box-shadow: var(--glow-blue);
+}
+
+/* ===== 英雄区域 - 保持原有结构 ===== */
+.hero {
+  text-align: center;
+  padding: 4rem 0;
+  background: linear-gradient(135deg, var(--neon-purple) 0%, var(--neon-blue) 100%);
+  color: white;
+  margin-bottom: 3rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background:
+    radial-gradient(circle at 20% 80%, rgba(0, 243, 255, 0.2) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(185, 103, 255, 0.2) 0%, transparent 50%);
+}
+
+.hero h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  position: relative;
+  z-index: 1;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  opacity: 0.9;
+  position: relative;
+  z-index: 1;
+}
+
+/* ===== 组织信息 - 保持原有结构 ===== */
+.org-info {
+  margin-bottom: 3rem;
+}
+
+.org-info h3 {
+  margin-bottom: 1.5rem;
+  color: var(--neon-blue);
+  font-size: 2rem;
+  text-align: center;
+}
+
+.org-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.org-card {
+  background: var(--card-bg);
+  padding: 1.5rem;
+  border-radius: 8px;
+  border: 1px solid var(--card-border);
+  border-left: 4px solid var(--neon-blue);
+  transition: all 0.3s ease;
+}
+
+.org-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--glow-blue);
+  border-color: var(--neon-blue);
+}
+
+.org-card h4 {
+  color: var(--neon-blue);
+  margin-bottom: 0.5rem;
+}
+
+.contact-info {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--card-border);
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+/* ===== 事件网格 - 保持原有结构 ===== */
+.events-section h3 {
+  margin-bottom: 1.5rem;
+  color: var(--neon-blue);
+  font-size: 2rem;
+  text-align: center;
+}
+
+.events-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 2rem;
+}
+
+.event-card {
+  background: var(--card-bg);
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--card-border);
+  transition: all 0.3s ease;
+}
+
+.event-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--glow-purple);
+  border-color: var(--neon-purple);
+}
+
+.event-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.event-card:hover .event-image {
+  transform: scale(1.05);
+}
+
+.event-content {
+  padding: 1.5rem;
+}
+
+.event-title {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  color: var(--neon-blue);
+}
+
+.event-description {
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
+.event-meta {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  font-size: 0.8rem;
+}
+
+.event-category {
+  background: linear-gradient(135deg, var(--neon-purple), var(--neon-pink));
+  color: white;
+  padding: 0.2rem 0.5rem;
+  border-radius: 12px;
+  font-size: 0.7rem;
+  box-shadow: var(--glow-purple);
+}
+
+.event-location {
+  color: var(--text-secondary);
+}
+
+.event-date {
+  color: var(--neon-green);
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.event-price {
+  color: var(--neon-yellow);
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+/* ===== 查看详情按钮 - 保持原有功能 ===== */
+.view-details-btn {
+  width: 100%;
+  padding: 0.75rem;
+  background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
+  color: var(--dark-bg);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  font-weight: bold;
+  text-decoration: none;
+  display: block;
+  text-align: center;
+}
+
+.view-details-btn:hover {
+  background: linear-gradient(135deg, var(--neon-purple), var(--neon-blue));
+  box-shadow: var(--glow-blue);
+  transform: translateY(-2px);
+  color: var(--dark-bg);
+  text-decoration: none;
+}
+
+/* ===== 搜索表单 - 保持原有结构 ===== */
+.search-section {
+  margin-bottom: 3rem;
+}
+
+.search-form {
+  background: var(--card-bg);
+  padding: 2rem;
+  border-radius: 8px;
+  border: 1px solid var(--card-border);
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+  color: var(--neon-blue);
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid var(--card-border);
+  border-radius: 4px;
+  font-size: 1rem;
+  background: var(--darker-bg);
+  color: var(--text-primary);
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: var(--neon-blue);
+  box-shadow: var(--glow-blue);
+}
+
+.form-buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+/* ===== 主要按钮 - 保持原有功能 ===== */
+.btn-primary {
+  background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
+  color: var(--dark-bg);
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  font-weight: bold;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, var(--neon-purple), var(--neon-blue));
+  box-shadow: var(--glow-blue);
+  transform: translateY(-2px);
+  color: var(--dark-bg);
+  text-decoration: none;
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--text-secondary);
+  padding: 0.75rem 1.5rem;
+  border: 1px solid var(--card-border);
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+  background: rgba(0, 243, 255, 0.1);
+  border-color: var(--neon-blue);
+  color: var(--neon-blue);
+  box-shadow: var(--glow-blue);
+}
+
+/* ===== 事件详情页面 - 保持原有结构 ===== */
+.event-details {
+  margin-top: 2rem;
+}
+
+.event-header {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.event-detail-image {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 2px solid var(--card-border);
+}
+
+.event-header-info h2 {
+  color: var(--neon-blue);
+  margin-bottom: 1rem;
+}
+
+.event-short-desc {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+}
+
+.event-meta-large {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.event-category-badge {
+  background: linear-gradient(135deg, var(--neon-purple), var(--neon-pink));
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  box-shadow: var(--glow-purple);
+}
+
+.event-org {
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+.event-content-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 3rem;
+}
+
+.event-main-content h3 {
+  color: var(--neon-blue);
+  margin-bottom: 1rem;
+}
+
+.event-full-desc {
+  line-height: 1.8;
+  margin-bottom: 2rem;
+  color: var(--text-secondary);
+}
+
+.event-info-card {
+  background: var(--card-bg);
+  padding: 1.5rem;
+  border-radius: 8px;
+  border: 1px solid var(--card-border);
+}
+
+.event-info-card h4 {
+  color: var(--neon-blue);
+  margin-bottom: 1rem;
+}
+
+.info-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.info-item {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--card-border);
+  color: var(--text-secondary);
+}
+
+.info-item strong {
+  color: var(--text-primary);
+}
+
+/* ===== 侧边栏卡片 - 保持原有结构 ===== */
+.event-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.goal-progress-card,
+.ticket-info-card,
+.org-contact-card {
+  background: var(--card-bg);
+  padding: 1.5rem;
+  border-radius: 8px;
+  border: 1px solid var(--card-border);
+}
+
+.goal-progress-card h4,
+.ticket-info-card h4,
+.org-contact-card h4 {
+  color: var(--neon-blue);
+  margin-bottom: 1rem;
+}
+
+.progress-container {
+  margin-top: 1rem;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 10px;
+  background-color: var(--darker-bg);
+  border-radius: 5px;
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+  border: 1px solid var(--card-border);
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--neon-blue), var(--neon-green));
+  transition: width 0.3s ease;
+  box-shadow: var(--glow-green);
+}
+
+.progress-text {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  text-align: center;
+}
+
+/* ===== 注册按钮 - 保持原有功能 ===== */
+.register-btn {
+  width: 100%;
+  padding: 1rem;
+  background: linear-gradient(135deg, var(--neon-green), var(--neon-blue));
+  color: var(--dark-bg);
+  border: none;
+  border-radius: 4px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+  font-weight: bold;
+}
+
+.register-btn:hover {
+  background: linear-gradient(135deg, var(--neon-blue), var(--neon-green));
+  box-shadow: var(--glow-green);
+  transform: translateY(-2px);
+}
+
+/* ===== 模态框 - 保持原有功能 ===== */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(5, 5, 8, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: var(--card-bg);
+  padding: 2rem;
+  border-radius: 8px;
+  max-width: 400px;
+  width: 90%;
+  position: relative;
+  border: 2px solid var(--neon-blue);
+  box-shadow: var(--glow-blue);
+}
+
+.close-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--neon-blue);
+  transition: all 0.3s ease;
+}
+
+.close-btn:hover {
+  color: var(--neon-pink);
+  transform: scale(1.1);
+}
+
+/* ===== 工具类 - 保持原有功能 ===== */
+.loading {
+  text-align: center;
+  padding: 2rem;
+  font-size: 1.1rem;
+  color: var(--neon-blue);
+}
+
+.error-message {
+  background: linear-gradient(135deg, var(--neon-pink), #ff1a5c);
+  color: white;
+  padding: 1rem;
+  border-radius: 4px;
+  margin: 1rem 0;
+  text-align: center;
+  box-shadow: var(--glow-pink);
+}
+
+.error {
+  color: var(--neon-pink);
+  text-align: center;
+  padding: 1rem;
+}
+
+/* ===== 响应式设计 - 保持原有功能 ===== */
+@media (max-width: 768px) {
+  .nav-container {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .event-header {
+    grid-template-columns: 1fr;
+  }
+
+  .event-content-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .events-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .org-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .form-buttons {
+    flex-direction: column;
+  }
+
+  .nav-menu {
+    gap: 1rem;
+  }
+}
+
+/* ===== 确保所有链接和按钮可点击 ===== */
+a, button, .view-details-btn, .register-btn, .btn-primary, .btn-secondary {
+  cursor: pointer !important;
+}
+
+/* ===== 确保文本可读性 ===== */
+p, span, div, h1, h2, h3, h4, h5, h6 {
+  color: var(--text-primary);
+}
+
+/* ===== 输入框占位符样式 ===== */
+::placeholder {
+  color: var(--text-muted) !important;
+  opacity: 0.7;
+}
+
+/* ===== 选择框样式 ===== */
+select {
+  color: var(--text-primary) !important;
+}
+
+select option {
+  background: var(--card-bg);
+  color: var(--text-primary);
+}
+/* ===== 注册模态框样式 ===== */
+#registerModal .modal-content {
+  max-width: 500px;
+  background: linear-gradient(135deg, var(--card-bg) 0%, #1a1a2e 100%);
+  border: 2px solid var(--neon-blue);
+  box-shadow: var(--glow-blue), 0 0 50px rgba(0, 243, 255, 0.2);
+}
+
+.modal-header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--card-border);
+}
+
+.modal-header h3 {
+  color: var(--neon-blue);
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.modal-body {
+  padding: 1rem 0;
+}
+
+.construction-animation {
+  text-align: center;
+  padding: 1rem;
+}
+
+.construction-icon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+
+.construction-animation h4 {
+  color: var(--neon-yellow);
+  margin-bottom: 1rem;
+  font-size: 1.25rem;
+}
+
+.construction-animation p {
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+.modal-footer {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--card-border);
+}
+
+.modal-footer .btn-primary,
+.modal-footer .btn-secondary {
+  padding: 0.75rem 1.5rem;
+  min-width: 120px;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  #registerModal .modal-content {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+  .modal-footer {
+    flex-direction: column;
+  }
+
+  .modal-footer .btn-primary,
+  .modal-footer .btn-secondary {
+    width: 100%;
+  }
+
+  .construction-icon {
+    font-size: 3rem;
+  }
+}
+/* ===== 导航栏注册按钮样式 ===== */
+.nav-register-btn {
+  background: linear-gradient(135deg, var(--neon-green), var(--neon-blue));
+  color: var(--dark-bg);
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+}
+
+.nav-register-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s ease;
+}
+
+.nav-register-btn:hover::before {
+  left: 100%;
+}
+
+.nav-register-btn:hover {
+  background: linear-gradient(135deg, var(--neon-blue), var(--neon-green));
+  box-shadow: var(--glow-green);
+  transform: translateY(-2px) scale(1.05);
+  color: var(--dark-bg);
+}
+
+.btn-icon {
+  font-size: 1rem;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+/* 导航菜单布局调整 */
+.nav-menu {
+  display: flex;
+  list-style: none;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .nav-register-btn {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.8rem;
+  }
+
+  .nav-register-btn .btn-text {
+    display: none; /* 在移动端只显示图标 */
+  }
+
+  .nav-register-btn .btn-icon {
+    margin-right: 0;
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav-menu {
+    gap: 1rem;
+  }
+
+  .nav-register-btn {
+    padding: 0.5rem;
+    min-width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+/* ===== 导航栏注册模态框特定样式 ===== */
+.feature-list {
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem 0;
+  text-align: left;
+}
+
+.feature-list li {
+  padding: 0.5rem 0;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  border-bottom: 1px solid var(--card-border);
+}
+
+.feature-list li:last-child {
+  border-bottom: none;
+}
+
+.feature-list li::before {
+  content: '✓';
+  color: var(--neon-green);
+  font-weight: bold;
+}
+
+#navRegisterModal .modal-content {
+  max-width: 500px;
+  background: linear-gradient(135deg, var(--card-bg) 0%, #1a1a2e 100%);
+  border: 2px solid var(--neon-purple);
+  box-shadow: var(--glow-purple), 0 0 50px rgba(185, 103, 255, 0.2);
+}
+
+#navRegisterModal .modal-header h3 {
+  color: var(--neon-purple);
+}
+
+#navRegisterModal .construction-icon {
+  color: var(--neon-purple);
+
+}

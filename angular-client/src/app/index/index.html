@@ -1,0 +1,83 @@
+<nav class="navbar">
+  <div class="nav-container">
+    <h1 class="nav-logo">CharityEvents</h1>
+    <ul class="nav-menu">
+      <li><a routerLink="/" class="nav-link">Home</a></li>
+      <li><a routerLink="/search" class="nav-link">Search event</a></li>
+      <li>
+        <button class="nav-register-btn">
+          <span class="btn-icon">🎫</span> Register now
+        </button>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<main class="container">
+  <!-- Hero -->
+  <section class="hero">
+    <h2>Make a Difference Through Charity Events</h2>
+    <p>Join us in supporting meaningful causes across Australia</p>
+  </section>
+
+  <!-- Organizations -->
+  <section class="org-info">
+    <h3>About Our Charities</h3>
+    <div class="org-cards">
+      <div class="org-card">
+        <h4>HopeWorks Foundation</h4>
+        <p>Empowering communities through education and healthcare.</p>
+        <div class="contact-info">Contact: info@hopeworks.org</div>
+      </div>
+
+      <div class="org-card">
+        <h4>Green City Trust</h4>
+        <p>Creating sustainable urban futures.</p>
+        <div class="contact-info">Contact: hello@greencity.org</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Events -->
+  <section class="events-section">
+    <h3>Upcoming Events</h3>
+
+    <div *ngIf="isLoading" class="loading">Loading events...</div>
+    <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+
+    <div *ngIf="!isLoading && !errorMessage" class="events-grid">
+      <div *ngIf="events.length === 0" class="no-events">No upcoming events found.</div>
+
+      <div *ngFor="let event of events" class="event-card">
+        <img
+          [src]="event.image_url || 'https://picsum.photos/400/300?random=' + event.id"
+          [alt]="event.name"
+          class="event-image"
+        />
+        <div class="event-content">
+          <h4 class="event-title">{{ event.name }}</h4>
+          <p class="event-description">{{ event.short_description }}</p>
+
+          <div class="event-meta">
+            <span class="event-category">{{ event.category_name }}</span>
+            <span class="event-location">{{ event.city }}, {{ event.state_region }}</span>
+          </div>
+
+          <div class="event-date">
+            {{ event.start_at | date:'MMM d, y h:mm a' }}
+          </div>
+
+          <div class="event-price">
+            {{ event.ticket_price_cents > 0
+            ? ('$' + ((event.ticket_price_cents / 100) | number:'1.2-2'))
+            : 'Free' }}
+          </div>
+
+          <button class="view-details-btn" (click)="viewEventDetails(event.id!)">
+            View Details
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
