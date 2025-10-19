@@ -67,3 +67,60 @@ exports.getRegistrationsByEvent = (req, res) => {
     res.json(results);
   });
 };
+
+// 管理员获取所有注册
+exports.getAllRegistrations = (req, res) => {
+  const query = `
+    SELECT r.id, r.event_id, e.name as event_name,
+           r.full_name, r.email, r.contact_phone, r.tickets_count, r.registered_at
+    FROM registrations r
+    JOIN events e ON r.event_id = e.id
+    ORDER BY r.registered_at DESC
+  `;
+
+  connection.query(query, (err, results) => {
+    if (err) {
+      console.error('Database error:', err);
+      return res.status(500).json({ error: 'Internal server error' });
+    }
+    res.json(results);
+  });
+};
+
+// 管理员删除注册
+exports.deleteRegistration = (req, res) => {
+  const registrationId = req.params.id;
+
+  const query = 'DELETE FROM registrations WHERE id = ?';
+  connection.query(query, [registrationId], (err, result) => {
+    if (err) {
+      console.error('Database error:', err);
+      return res.status(500).json({ error: 'Internal server error' });
+    }
+    res.json({ message: 'Registration deleted successfully' });
+  });
+};
+
+// 管理员更新注册信息
+exports.updateRegistration = (req, res) => {
+  const registrationId = req.params.id;
+  const { full_name, email, contact_phone, tickets_count } = req.body;
+
+  const query = `
+    UPDATE registrations
+    SET full_name = ?, email = ?, contact_phone = ?, tickets_count = ?
+    WHERE id = ?
+  `;
+
+  connection.query(
+    query,
+    [full_name, email, contact_phone, tickets_count, registrationId],
+    (err, result) => {
+      if (err) {
+        console.error('Database error:', err);
+        return res.status(500).json({ error: 'Internal server error' });
+      }
+      res.json({ message: 'Registration updated successfully' });
+    }
+  );
+};
