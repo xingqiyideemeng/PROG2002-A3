@@ -1,0 +1,20 @@
+<app-navbar></app-navbar>
+
+<div class="admin-container">
+  <!-- 左侧导航 -->
+  <aside class="admin-sidebar">
+    <div class="admin-logo">
+      <h2>Admin Panel</h2>
+    </div>
+    <nav class="admin-nav">
+      <a routerLink="events" routerLinkActive="active" class="nav-link">Events</a>
+      <a routerLink="categories" routerLinkActive="active" class="nav-link">Categories</a>
+      <a routerLink="registrations" routerLinkActive="active" class="nav-link">Registrations</a>
+    </nav>
+  </aside>
+
+  <!-- 主内容 -->
+  <main class="admin-content">
+    <router-outlet></router-outlet>
+  </main>
+</div>

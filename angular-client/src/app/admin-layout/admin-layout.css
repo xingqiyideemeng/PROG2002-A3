@@ -1,0 +1,84 @@
+.admin-container {
+  display: flex;
+  min-height: 100vh;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: var(--dark-bg);
+}
+
+/* 左侧导航 */
+.admin-sidebar {
+  width: 220px;
+  background: var(--card-bg);
+  border-right: 2px solid var(--neon-blue);
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 0;
+  box-shadow: 0 0 20px rgba(0, 243, 255, 0.2);
+}
+
+.admin-logo {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.admin-logo h2 {
+  font-size: 1.5rem;
+  background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.admin-nav {
+  display: flex;
+  flex-direction: column;
+}
+
+.admin-nav .nav-link {
+  padding: 1rem 1.5rem;
+  margin: 0.25rem 0;
+  border-left: 4px solid transparent;
+  color: var(--text-primary);
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.admin-nav .nav-link:hover,
+.admin-nav .nav-link.active {
+  border-left-color: var(--neon-blue);
+  background: rgba(0, 243, 255, 0.1);
+  box-shadow: var(--glow-blue);
+  transform: translateX(3px);
+}
+
+/* 主内容 */
+.admin-content {
+  flex: 1;
+  padding: 2rem;
+  background: var(--dark-bg);
+  overflow-y: auto;
+}
+
+/* 响应式 */
+@media (max-width: 768px) {
+  .admin-container {
+    flex-direction: column;
+  }
+
+  .admin-sidebar {
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-around;
+    border-right: none;
+    border-bottom: 2px solid var(--neon-blue);
+  }
+
+  .admin-nav {
+    flex-direction: row;
+    gap: 1rem;
+  }
+
+  .admin-nav .nav-link {
+    padding: 0.5rem 1rem;
+  }
+}
