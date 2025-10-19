@@ -43,6 +43,9 @@ router.delete('/admin/registrations/:id', registrationsController.deleteRegistra
 // 更新注册信息
 router.put('/admin/registrations/:id', registrationsController.updateRegistration);
 
+// 获取所有分类
+router.get('/admin/categories', categoriesController.getAllCategories);
+
 // 添加分类
 router.post('/admin/categories', categoriesController.createCategory);
 
