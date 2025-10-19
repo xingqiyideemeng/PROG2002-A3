@@ -4,7 +4,8 @@ import { Search } from './search/search';
 import { EventDetails } from './event-details/event-details';
 import { Register } from './register/register';
 import { AdminLayout } from './admin-layout/admin-layout';
-import {AdminEvents} from './admin-events/admin-events';
+import { AdminEvents } from './admin-events/admin-events';
+import { AdminCategories } from './admin-categories/admin-categories';
 
 export const routes: Routes = [
   { path: '', component: Index },
@@ -16,7 +17,8 @@ export const routes: Routes = [
     component: AdminLayout,
     children: [
       { path: '', redirectTo: 'events', pathMatch: 'full' },
-      { path: 'events', component: AdminEvents }
+      { path: 'events', component: AdminEvents },
+      { path: 'categories', component: AdminCategories },
     ]
   },
 ];

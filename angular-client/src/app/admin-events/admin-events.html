@@ -1,0 +1,178 @@
+<div class="events-page">
+
+  <div class="page-header">
+    <button class="btn-primary" (click)="openModal()">Add Event</button>
+  </div>
+
+  <div *ngIf="loading" class="loading">Loading event details...</div>
+  <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+
+  <!-- 事件列表表格 -->
+  <table class="table">
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Organization</th>
+      <th>Category</th>
+      <th>Start Date</th>
+      <th>End Date</th>
+      <th>Tickets</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let event of events">
+      <td>{{ event.name }}</td>
+      <td>{{ event.org_id }}</td>
+      <td>{{ event.category_id }}</td>
+      <td>{{ event.start_at | date: 'short' }}</td>
+      <td>{{ event.end_at | date: 'short' }}</td>
+      <td>{{ event.tickets_total || '-' }}</td>
+      <td>
+        <button class="btn-secondary" (click)="editEvent(event)">Edit</button>
+        <button class="btn-secondary" (click)="deleteEvent(event.id!)">Delete</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+  <!-- 新增/编辑表单模态框 -->
+  <div class="modal" *ngIf="showModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>{{ isEditMode ? 'Edit Event' : 'Add Event' }}</h3>
+        <span class="close-btn" (click)="closeModal()">&times;</span>
+      </div>
+
+      <div class="modal-body">
+        <div class="form-group-row">
+          <div class="form-group">
+            <label>Organization</label>
+            <select [(ngModel)]="currentEvent.org_id">
+              <option [value]="1">HopeWorks Foundation</option>
+              <option [value]="2">Green City Trust</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Category</label>
+            <select [(ngModel)]="currentEvent.category_id">
+              <option *ngFor="let cat of categories" [value]="cat.id">{{ cat.name }}</option>
+            </select>
+          </div>
+        </div>
+
+
+        <div class="form-group-row">
+          <div class="form-group">
+            <label>Name</label>
+            <input type="text" [(ngModel)]="currentEvent.name" placeholder="Event name">
+          </div>
+
+          <div class="form-group">
+            <label>Short Description</label>
+            <input type="text" [(ngModel)]="currentEvent.short_description" placeholder="Short description">
+          </div>
+        </div>
+
+
+        <div class="form-group-row">
+          <div class="form-group">
+            <label>Full Description</label>
+            <textarea [(ngModel)]="currentEvent.full_description" rows="4" placeholder="Full description"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label>Image URL</label>
+            <input type="text" [(ngModel)]="currentEvent.image_url" placeholder="Image URL">
+          </div>
+        </div>
+
+
+        <div class="form-group-row">
+          <div class="form-group">
+            <label>Venue Name</label>
+            <input type="text" [(ngModel)]="currentEvent.venue_name" placeholder="Venue name">
+          </div>
+
+          <div class="form-group">
+            <label>Venue Address</label>
+            <input type="text" [(ngModel)]="currentEvent.venue_address" placeholder="Venue address">
+          </div>
+        </div>
+
+
+        <div class="form-group-row">
+          <div class="form-group">
+            <label>City</label>
+            <input type="text" [(ngModel)]="currentEvent.city" placeholder="City">
+          </div>
+
+          <div class="form-group">
+            <label>State / Region</label>
+            <input type="text" [(ngModel)]="currentEvent.state_region" placeholder="State / Region">
+          </div>
+        </div>
+
+
+        <div class="form-group-row">
+          <div class="form-group">
+            <label>Postcode</label>
+            <input type="text" [(ngModel)]="currentEvent.postcode" placeholder="Postcode">
+          </div>
+
+          <div class="form-group">
+            <label>Country</label>
+            <input type="text" [(ngModel)]="currentEvent.country" placeholder="Country">
+          </div>
+        </div>
+
+
+        <div class="form-group-row">
+          <div class="form-group">
+            <label>Start At</label>
+            <input type="datetime-local" type="datetime-local" [(ngModel)]="currentEvent.start_at">
+          </div>
+
+          <div class="form-group">
+            <label>End At</label>
+            <input type="datetime-local" type="datetime-local" [(ngModel)]="currentEvent.end_at">
+          </div>
+        </div>
+
+
+        <div class="form-group-row">
+          <div class="form-group">
+            <label>Ticket Price (cents)</label>
+            <input type="number" [(ngModel)]="currentEvent.ticket_price_cents" placeholder="Ticket price">
+          </div>
+
+          <div class="form-group">
+            <label>Currency</label>
+            <input type="text" [(ngModel)]="currentEvent.currency" placeholder="Currency">
+          </div>
+        </div>
+
+
+        <div class="form-group-row">
+          <div class="form-group">
+            <label>Total Tickets</label>
+            <input type="number" [(ngModel)]="currentEvent.tickets_total" placeholder="Total tickets">
+          </div>
+
+          <div class="form-group">
+            <label>Goal Amount (cents)</label>
+            <input type="number" [(ngModel)]="currentEvent.goal_amount_cents" placeholder="Goal amount">
+          </div>
+        </div>
+
+        <div *ngIf="formErrorMessage" class="error-message">{{ formErrorMessage }}</div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn-primary" (click)="saveEvent()">Save</button>
+        <button class="btn-secondary" (click)="closeModal()">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>

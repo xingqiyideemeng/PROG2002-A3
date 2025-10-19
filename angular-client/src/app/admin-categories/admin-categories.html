@@ -1,0 +1,58 @@
+<div class="categories-page">
+
+  <div class="page-header">
+    <button class="btn-primary" (click)="openModal()">Add Category</button>
+  </div>
+
+  <div *ngIf="loading" class="loading">Loading categories...</div>
+  <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+
+  <table class="table">
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let cat of categories">
+      <td>{{ cat.name }}</td>
+      <td>{{ cat.description || '-' }}</td>
+      <td>
+        <button class="btn-secondary" (click)="editCategory(cat)">Edit</button>
+        <button class="btn-secondary" (click)="deleteCategory(cat.id!)">Delete</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+  <!-- 模态框 -->
+  <div class="modal" *ngIf="showModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>{{ isEditMode ? 'Edit Category' : 'Add Category' }}</h3>
+        <span class="close-btn" (click)="closeModal()">&times;</span>
+      </div>
+
+      <div class="modal-body">
+        <div class="form-group">
+          <label>Name</label>
+          <input type="text" [(ngModel)]="currentCategory.name" placeholder="Category name">
+        </div>
+
+        <div class="form-group">
+          <label>Description</label>
+          <textarea [(ngModel)]="currentCategory.description" rows="3" placeholder="Description"></textarea>
+        </div>
+
+        <div *ngIf="formErrorMessage" class="error-message">{{ formErrorMessage }}</div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn-primary" (click)="saveCategory()">Save</button>
+        <button class="btn-secondary" (click)="closeModal()">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
