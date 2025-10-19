@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const eventsController = require('../controllers/eventsController');
 const registrationsController = require('../controllers/registrationsController');
+const categoriesController = require('../controllers/categoriesController');
 
 // 主页数据 - 获取当前和即将到来的活动
 router.get('/events/home', eventsController.getHomeEvents);
@@ -32,5 +33,23 @@ router.put('/admin/events/:id', eventsController.updateEvent);
 
 // 删除事件
 router.delete('/admin/events/:id', eventsController.deleteEvent);
+
+// 查看所有注册
+router.get('/admin/registrations', registrationsController.getAllRegistrations);
+
+// 删除任意注册
+router.delete('/admin/registrations/:id', registrationsController.deleteRegistration);
+
+// 更新注册信息
+router.put('/admin/registrations/:id', registrationsController.updateRegistration);
+
+// 添加分类
+router.post('/admin/categories', categoriesController.createCategory);
+
+// 更新分类
+router.put('/admin/categories/:id', categoriesController.updateCategory);
+
+// 删除分类
+router.delete('/admin/categories/:id', categoriesController.deleteCategory);
 
 module.exports = router;
