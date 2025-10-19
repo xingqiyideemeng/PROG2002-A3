@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {EventsApi} from '../api/events-api';
 import {CommonModule} from '@angular/common';
 import {Navbar} from '../navbar/navbar';
+import {Registration, RegistrationsApi} from '../api/registrations-api';
 
 @Component({
   selector: 'app-event-details',
@@ -13,10 +14,12 @@ import {Navbar} from '../navbar/navbar';
 export class EventDetails {
   event: any;
   loading = true;
+  loadingRegs = true;
   errorMessage = '';
   showModalFlag = false;
+  registrations: Registration[] = [];
 
-  constructor(private route: ActivatedRoute, private eventsApi: EventsApi) {}
+  constructor(private route: ActivatedRoute, private eventsApi: EventsApi, private registrationsApi: RegistrationsApi, private router: Router) {}
 
   ngOnInit(): void {
     const eventId = this.route.snapshot.queryParamMap.get('id');
@@ -27,6 +30,7 @@ export class EventDetails {
     }
 
     this.loadEventDetails(eventId);
+    this.loadEventRegistrations(eventId);
   }
 
   loadEventDetails(id: string): void {
@@ -43,6 +47,20 @@ export class EventDetails {
     });
   }
 
+  loadEventRegistrations(id: string): void {
+    this.registrationsApi.getEventRegistrations(id).subscribe({
+      next: (data: any) => {
+        this.registrations = data;
+        this.loadingRegs = false;
+      },
+      error: (err) => {
+        console.error(err);
+        this.errorMessage = 'Error loading event registrations. Please try again.';
+        this.loadingRegs = false;
+      },
+    });
+  }
+
   formatDateTime(start: string, end: string): string {
     const startDate = new Date(start);
     const endDate = new Date(end);
@@ -53,7 +71,8 @@ export class EventDetails {
   }
 
   openModal(): void {
-    this.showModalFlag = true;
+    // this.showModalFlag = true;
+    this.router.navigate(['event-register'], { queryParams: { id: this.event.id } })
   }
 
   closeModal(): void {

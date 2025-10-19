@@ -93,6 +93,36 @@
     </div>
   </section>
 
+  <div class="event-details registered-participants">
+    <h3>Registered Participants</h3>
+
+    <div *ngIf="loadingRegs" class="loading">Loading registrations...</div>
+    <div *ngIf="!loadingRegs && registrations.length === 0" class="error-message">
+      No registrations yet.
+    </div>
+
+    <table *ngIf="registrations.length > 0" class="table">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Tickets</th>
+        <th>Registered At</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let reg of registrations">
+        <td>{{ reg.full_name }}</td>
+        <td>{{ reg.email }}</td>
+        <td>{{ reg.contact_phone || '-' }}</td>
+        <td>{{ reg.tickets_count }}</td>
+        <td>{{ reg.registered_at | date:'medium' }}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
   <!-- 注册模态框 -->
   <div class="modal" *ngIf="showModalFlag">
     <div class="modal-content">

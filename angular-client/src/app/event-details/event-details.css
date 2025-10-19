@@ -1,0 +1,7 @@
+.registered-participants {
+  margin-bottom: 100px;
+}
+
+.registered-participants h3 {
+  color: var(--neon-blue);
+}
