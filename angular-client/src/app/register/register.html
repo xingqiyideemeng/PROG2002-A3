@@ -1,0 +1,81 @@
+<app-navbar></app-navbar>
+
+<main class="container">
+  <section class="hero">
+    <h2>Join the Event</h2>
+    <p>Register below to secure your spot and be part of the change.</p>
+  </section>
+
+  <div class="search-form">
+    <h3 style="color: var(--neon-blue); text-align:center; margin-bottom: 2rem;">
+      Event Registration
+    </h3>
+
+    <form (ngSubmit)="submitRegistration()" #registerForm="ngForm">
+      <div class="form-group">
+        <label for="full_name">Full Name</label>
+        <input
+          id="full_name"
+          name="full_name"
+          type="text"
+          placeholder="Enter your full name"
+          [(ngModel)]="registration.full_name"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input
+          id="email"
+          name="email"
+          type="email"
+          placeholder="example@mail.com"
+          [(ngModel)]="registration.email"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="contact_phone">Contact Number</label>
+        <input
+          id="contact_phone"
+          name="contact_phone"
+          type="tel"
+          placeholder="+61-400-000-000"
+          [(ngModel)]="registration.contact_phone"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="tickets_count">Number of Tickets</label>
+        <select
+          id="tickets_count"
+          name="tickets_count"
+          [(ngModel)]="registration.tickets_count"
+          required
+        >
+          <option value="">Select...</option>
+          <option *ngFor="let n of [1,2,3,4,5]" [value]="n">{{ n }}</option>
+        </select>
+      </div>
+
+      <div class="form-buttons">
+        <button class="btn-primary" type="submit" [disabled]="!registerForm.valid">
+          Submit Registration
+        </button>
+        <button class="btn-secondary" type="button" (click)="resetForm()">
+          Reset
+        </button>
+      </div>
+    </form>
+
+    <div *ngIf="successMessage" class="loading" style="margin-top: 1.5rem;">
+      {{ successMessage }}
+    </div>
+    <div *ngIf="errorMessage" class="error-message" style="margin-top: 1.5rem;">
+      {{ errorMessage }}
+    </div>
+  </div>
+</main>
