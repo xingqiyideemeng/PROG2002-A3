@@ -1,1 +1,100 @@
-<p>search works!</p>
+<nav class="navbar">
+  <div class="nav-container">
+    <h1 class="nav-logo">CharityEvents</h1>
+    <ul class="nav-menu">
+      <li><a routerLink="/" class="nav-link">Home</a></li>
+      <li><a routerLink="/search" class="nav-link active">Search event</a></li>
+      <li>
+        <button class="nav-register-btn">
+          <span class="btn-icon">🎫</span> Register now
+        </button>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<main class="container">
+  <!-- 搜索表单 -->
+  <section class="search-section">
+    <h2>Find Charity Events</h2>
+
+    <form class="search-form" (ngSubmit)="performSearch()">
+      <div class="form-group">
+        <label for="category">Event Category:</label>
+        <select id="category" [(ngModel)]="filters.category" name="category">
+          <option value="all">All Categories</option>
+          <option *ngFor="let cat of categories" [value]="cat.name">{{ cat.name }}</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="city">City or Region:</label>
+        <input
+          type="text"
+          id="city"
+          name="city"
+          placeholder="Enter city or region..."
+          [(ngModel)]="filters.city"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="date">Event Date:</label>
+        <input
+          type="date"
+          id="date"
+          name="date"
+          [(ngModel)]="filters.date"
+        />
+      </div>
+
+      <div class="form-buttons">
+        <button type="submit" class="btn-primary">Search Events</button>
+        <button type="button" class="btn-secondary" (click)="clearFilters()">Clear Filters</button>
+      </div>
+    </form>
+  </section>
+
+  <!-- 搜索结果 -->
+  <section class="results-section">
+    <h3>Search Results</h3>
+
+    <div *ngIf="isLoading" class="loading">Loading events...</div>
+    <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+
+    <div class="events-grid" *ngIf="!isLoading && !errorMessage">
+      <p *ngIf="events.length === 0">No events found matching your criteria.</p>
+
+      <div *ngFor="let event of events" class="event-card">
+        <img
+          [src]="event.image_url || 'https://picsum.photos/400/300?random=' + event.id"
+          [alt]="event.name"
+          class="event-image"
+        />
+        <div class="event-content">
+          <h4 class="event-title">{{ event.name }}</h4>
+          <p class="event-description">{{ event.short_description }}</p>
+
+          <div class="event-meta">
+            <span class="event-category">{{ event.category_name }}</span>
+            <span class="event-location">{{ event.city }}, {{ event.state_region }}</span>
+          </div>
+
+          <div class="event-date">
+            {{ event.start_at | date:'MMM d, y' }}
+          </div>
+
+          <div class="event-price">
+            {{ event.ticket_price_cents > 0
+            ? ('$' + ((event.ticket_price_cents / 100) | number:'1.2-2'))
+            : 'Free' }}
+          </div>
+
+          <button class="view-details-btn" (click)="viewEventDetails(event.id!)">
+            View Details
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>

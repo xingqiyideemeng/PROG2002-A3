@@ -41,8 +41,8 @@ export class EventsApi {
     return this.http.get<CharityEvent[]>(HOST + '/api/events/home')
   }
 
-  searchEvents(): Observable<CharityEvent[]> {
-    return this.http.get<CharityEvent[]>(HOST + '/api/events/search')
+  searchEvents(params: { category: string, city: string, date: string }): Observable<CharityEvent[]> {
+    return this.http.get<CharityEvent[]>(HOST + '/api/events/search', { params })
   }
 
   getEventDetails(id: number): Observable<CharityEvent> {

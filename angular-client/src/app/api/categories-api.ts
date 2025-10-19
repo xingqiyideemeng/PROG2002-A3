@@ -3,7 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {HOST} from '../config';
 
-interface Category {
+export interface Category {
   id?: number;
   name: string;
   description: string;
