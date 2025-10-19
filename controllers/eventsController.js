@@ -184,3 +184,83 @@ exports.createEvent = (req, res) => {
     });
 };
 
+// 更新事件
+exports.updateEvent = (req, res) => {
+    const eventId = req.params.id;
+    const {
+        org_id,
+        category_id,
+        name,
+        short_description,
+        full_description,
+        image_url,
+        venue_name,
+        venue_address,
+        city,
+        state_region,
+        postcode,
+        country,
+        start_at,
+        end_at,
+        ticket_price_cents,
+        currency,
+        tickets_total,
+        tickets_sold,
+        goal_amount_cents,
+        amount_raised_cents,
+        is_suspended
+    } = req.body;
+
+    const query = `
+        UPDATE events SET
+            org_id = ?, category_id = ?, name = ?, short_description = ?, full_description = ?, image_url = ?,
+            venue_name = ?, venue_address = ?, city = ?, state_region = ?, postcode = ?, country = ?,
+            start_at = ?, end_at = ?, ticket_price_cents = ?, currency = ?, tickets_total = ?, tickets_sold = ?,
+            goal_amount_cents = ?, amount_raised_cents = ?, is_suspended = ?
+        WHERE id = ?
+    `;
+
+    const params = [
+        org_id, category_id, name, short_description, full_description, image_url,
+        venue_name, venue_address, city, state_region, postcode, country,
+        start_at, end_at, ticket_price_cents, currency, tickets_total, tickets_sold,
+        goal_amount_cents, amount_raised_cents, is_suspended || 0,
+        eventId
+    ];
+
+    connection.query(query, params, (err, results) => {
+        if (err) {
+            console.error('Database error:', err);
+            return res.status(500).json({ error: 'Internal server error' });
+        }
+        res.json({ message: 'Event updated' });
+    });
+};
+
+// 删除事件
+exports.deleteEvent = (req, res) => {
+    const eventId = req.params.id;
+
+    // 先检查是否有注册
+    const registrationCountQuery = 'SELECT COUNT(*) AS count FROM registrations WHERE event_id = ?';
+    connection.query(registrationCountQuery, [eventId], (err, results) => {
+        if (err) {
+            console.error('Database error:', err);
+            return res.status(500).json({ error: 'Internal server error' });
+        }
+
+        if (results[0].count > 0) {
+            return res.status(400).json({ error: 'Cannot delete event: there are registrations' });
+        }
+
+        // 没有注册，可以删除
+        const deleteQuery = 'DELETE FROM events WHERE id = ?';
+        connection.query(deleteQuery, [eventId], (err, results) => {
+            if (err) {
+                console.error('Database error:', err);
+                return res.status(500).json({ error: 'Internal server error' });
+            }
+            res.json({ message: 'Event deleted' });
+        });
+    });
+};

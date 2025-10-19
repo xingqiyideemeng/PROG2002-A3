@@ -21,4 +21,16 @@ router.post('/registrations', registrationsController.createRegistration);
 // 获取指定 event 的所有注册
 router.get('/registrations/event/:eventId', registrationsController.getRegistrationsByEvent);
 
+// 管理员获取所有事件
+router.get('/admin/events', eventsController.getAllEvents);
+
+// 添加事件
+router.post('/admin/events', eventsController.createEvent);
+
+// 更新事件
+router.put('/admin/events/:id', eventsController.updateEvent);
+
+// 删除事件
+router.delete('/admin/events/:id', eventsController.deleteEvent);
+
 module.exports = router;
